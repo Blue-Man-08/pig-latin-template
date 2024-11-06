@@ -25,15 +25,35 @@ public class PigLatinTranslator
     return result;
   }
 
-  private static String translateWord(String input)
+  public static String translateWord(String input)
   {
-    // System.out.println("translateWord: '" + input + "'");
-
-    // Replace this code to correctly translate a single word.
-    // Start here first!
-    String result = input;
-    
-    return result;
+    String testCases = "aeiou";
+    String returnVal = "";
+    int firstVowel = 300000000;
+    input = input.toLowerCase();
+    if(input.indexOf("a") < firstVowel && input.indexOf("a") != -1){
+      firstVowel = input.indexOf("e");
+    }
+    if(input.indexOf("e") < firstVowel && input.indexOf("e") != -1){
+      firstVowel = input.indexOf("e");
+    }
+    if(input.indexOf("i") < firstVowel && input.indexOf("i") != -1){
+      firstVowel = input.indexOf("i");
+    }
+    if(input.indexOf("o") < firstVowel && input.indexOf("o") != -1){
+      firstVowel = input.indexOf("o");
+    }
+    if(input.indexOf("u") < firstVowel && input.indexOf("u") != -1){
+      firstVowel = input.indexOf("u");
+    }
+    if(input.indexOf("y") < firstVowel && input.indexOf("y") != -1){
+      firstVowel = input.indexOf("y");
+    }
+    returnVal = input.substring(firstVowel, input.length()) + input.substring(0, firstVowel);
+    if(testCases.contains(returnVal.substring(returnVal.length()-1, returnVal.length()))){
+      return returnVal + "yay";
+    }
+    return returnVal + "ay";
   }
 
   // Add additonal private methods here.
