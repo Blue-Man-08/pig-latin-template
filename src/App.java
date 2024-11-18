@@ -29,7 +29,7 @@ public class App {
         // Start with a "test" book based on a string.
         // Get this to work, and all the tests to pass first.
         ///input.readFromString("Test", "Dog\nCat\nMouse");
-        System.out.println(PigLatinTranslator.translateWord("o"));
+        System.out.println(PigLatinTranslator.translateWord("thermo"));
 
         ///input.printlines(0,2);
         ///Book output = PigLatinTranslator.translate(input);
