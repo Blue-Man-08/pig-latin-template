@@ -21,18 +21,18 @@ public class App {
 
 
         // Run tests, comment out once they pass.
-        ///TestSuite.run();
+        //TestSuite.run();
 
         // Starter book
         Book input = new Book();
         Book test = new Book();
         // Start with a "test" book based on a string.
         // Get this to work, and all the tests to pass first.
-        ///input.readFromString("Test", "Dog\nCat\nMouse");
-        System.out.println(PigLatinTranslator.translateWord("thermo"));
+        input.readFromUrl("Romeo and Juliet", "https://www.gutenberg.org/cache/epub/1513/pg1513.txt");
+        System.out.println(PigLatinTranslator.translateWord("tyrants in paris"));
 
-        ///input.printlines(0,2);
-        ///Book output = PigLatinTranslator.translate(input);
+        input.printlines(101,3);
+        Book output = PigLatinTranslator.translate(input);
         ///output.printlines(0,2);
         //output.writeToFile();
     }
