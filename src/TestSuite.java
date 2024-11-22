@@ -38,7 +38,7 @@ public class TestSuite
         }
         else
         {
-            System.out.println("--- TEST FAILED! :( ---");
+            System.out.println("--- Test Failed :( ---");
         }
     }
 

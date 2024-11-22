@@ -21,21 +21,27 @@ public class PigLatinTranslator
     // The input to this function could be any English string. 
     // A sentence, paragraph, or a single word. 
     // It should call translateWord at least once.
-    String result = translateWord(input);
+    String result = translateLine(input);
     return result;
   }
   public static String translateLine(String input){
+    String returnPhrase = "";
+    List<Integer> nonLetters = nonLetterPlace(input);
+    for(int i = 0; i <= nonLetters.size(); i++){
+      if(nonLetters.get(0) != 0 && i == 0){
+        returnPhrase += PigLatinTranslator.translateWord(input.substring(0, nonLetters.get(i+1)));
+      }
+      returnPhrase += PigLatinTranslator.translateWord(input.substring(nonLetters.get(i), nonLetters.get(i+1)));
+    }
+    return returnPhrase;
     
-    return output;
   }
 
   public static String translateWord(String input)
   {
-    String testCases = "aeiouy";
+    String testCases = "aeiouyAEIOUY";
     String returnVal = "";
     int firstVowel = 3000;
-    input = input.toLowerCase();
-    System.out.println(PigLatinTranslator.spacePlace(input));
     if(input.length() == 0){
       return "";
     }
@@ -54,22 +60,23 @@ public class PigLatinTranslator
     }
     return returnVal + "ay";
   }
-  public static List<Integer> spacePlace(String input){
+  public static List<Integer> nonLetterPlace(String input){
     //returns index of spaces
+    String testCases = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     List<Integer> spaceList = new ArrayList<Integer>();
     for(int i = 1; i <= input.length(); i++){
-      if(input.substring(i-1,i).equals(" ")){
+      if(!(testCases.contains(input.substring(i-1,i)))){
         spaceList.add(i-1);
       }
     }
     return spaceList;
   }
-  private static String preSpaces(){
+  //private static String preSpaces(){
 
-  }
-  private static String postSpaces(){
+  //}
+  //private static String postSpaces(){
 
-  }
+  //}
   // Add additonal private methods here.
   // For example, I had one like this:
   // private static String capitalizeFirstLetter(String input)
