@@ -15,27 +15,53 @@ public class PigLatinTranslator
 
   public static String translate(String input)
   {
-    // System.out.println("Translate String: '" + input + "'");
-
-    // Replace this code to translate a string input.
-    // The input to this function could be any English string. 
-    // A sentence, paragraph, or a single word. 
-    // It should call translateWord at least once.
     String result = translateLine(input);
     return result;
   }
   public static String translateLine(String input){
+    input = input+" ";
     String returnPhrase = "";
     List<Integer> nonLetters = nonLetterPlace(input);
-    for(int i = 0; i <= nonLetters.size(); i++){
+    System.out.println(nonLetters);
+    for(int i = 0; i < nonLetters.size(); i++){
+      System.out.println("top");
       if(nonLetters.get(0) != 0 && i == 0){
-        returnPhrase += PigLatinTranslator.translateWord(input.substring(0, nonLetters.get(i+1)));
+        returnPhrase += PigLatinTranslator.translateWord(input.substring(0, nonLetters.get(i)));
+        System.out.println("x" + input.substring(0, nonLetters.get(i)) + "x");
       }
-      returnPhrase += PigLatinTranslator.translateWord(input.substring(nonLetters.get(i), nonLetters.get(i+1)));
+      if(nonLetters.get(i) != nonLetters.get(i+1)-1 && i != 0){
+        returnPhrase += PigLatinTranslator.translateWord(input.substring(nonLetters.get(i-1)+1, nonLetters.get(i)));
+        System.out.println("again!");
+        System.out.println("xg" + input.substring(nonLetters.get(i-1)+1, nonLetters.get(i)) + "xg");
+        System.out.println("xt"+ PigLatinTranslator.translateWord(input.substring(nonLetters.get(i-1)+1, nonLetters.get(i))) + "xt");
+        System.out.println(returnPhrase+"g");
+      }
+      if(nonLetters.get(i) == nonLetters.get(i+1)-1){
+        int x = i;
+        while(nonLetters.get(x) == nonLetters.get(x+1)-1){
+          System.out.println("defhere!");
+          System.out.println(returnPhrase);
+          returnPhrase += input.substring(nonLetters.get(x), nonLetters.get(x)+1);
+          System.out.println(x);
+          System.out.println(returnPhrase);
+          x++;
+        }
+      }
+      else{
+        returnPhrase += input.substring(nonLetters.get(i), nonLetters.get(i)+1);
+        System.out.println("xf"+ input.substring(nonLetters.get(i), nonLetters.get(i)+1) + "xf");
+        System.out.println("here!");
+        System.out.println(returnPhrase + "f");
+        }
+      
+      if(i == nonLetters.size()-2){
+        return returnPhrase;
+      }
+      System.out.println(returnPhrase + "x");
     }
     return returnPhrase;
-    
   }
+    
 
   public static String translateWord(String input)
   {
@@ -48,11 +74,11 @@ public class PigLatinTranslator
     for( int i = 1; i <= input.length(); i++){
       if(testCases.contains(input.substring(i-1, i)) && firstVowel == 3000){
         firstVowel = i;
-        System.out.println(i);
+        //System.out.println(i);
       } 
     }
     if(firstVowel == 3000){
-      returnVal = input.substring(input.length()-1, input.length()) + input.substring(0, input.length()-1) + "ay";
+      returnVal = input.substring(1, input.length()) + input.substring(0, 1) + "ay";
     }
     returnVal = input.substring(firstVowel-1, input.length()) + input.substring(0, firstVowel-1);
     if(testCases.contains(returnVal.substring(returnVal.length()-1, returnVal.length()))){
@@ -71,14 +97,5 @@ public class PigLatinTranslator
     }
     return spaceList;
   }
-  //private static String preSpaces(){
-
-  //}
-  //private static String postSpaces(){
-
-  //}
-  // Add additonal private methods here.
-  // For example, I had one like this:
-  // private static String capitalizeFirstLetter(String input)
 
 }
