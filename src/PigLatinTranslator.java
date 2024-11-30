@@ -19,48 +19,62 @@ public class PigLatinTranslator
     return result;
   }
   public static String translateLine(String input){
+    // "tryants, in paris, my goats."
     input = input+" ";
     String returnPhrase = "";
     List<Integer> nonLetters = nonLetterPlace(input);
     System.out.println(nonLetters);
-    for(int i = 0; i < nonLetters.size(); i++){
-      System.out.println("top");
-      if(nonLetters.get(0) != 0 && i == 0){
-        returnPhrase += PigLatinTranslator.translateWord(input.substring(0, nonLetters.get(i)));
-        System.out.println("x" + input.substring(0, nonLetters.get(i)) + "x");
-      }
-      if(nonLetters.get(i) != nonLetters.get(i+1)-1 && i != 0){
-        returnPhrase += PigLatinTranslator.translateWord(input.substring(nonLetters.get(i-1)+1, nonLetters.get(i)));
-        System.out.println("again!");
-        System.out.println("xg" + input.substring(nonLetters.get(i-1)+1, nonLetters.get(i)) + "xg");
-        System.out.println("xt"+ PigLatinTranslator.translateWord(input.substring(nonLetters.get(i-1)+1, nonLetters.get(i))) + "xt");
-        System.out.println(returnPhrase+"g");
-      }
-      if(nonLetters.get(i) == nonLetters.get(i+1)-1){
-        int x = i;
-        while(nonLetters.get(x) == nonLetters.get(x+1)-1){
-          System.out.println("defhere!");
-          System.out.println(returnPhrase);
-          returnPhrase += input.substring(nonLetters.get(x), nonLetters.get(x)+1);
-          System.out.println(x);
-          System.out.println(returnPhrase);
-          x++;
-        }
-      }
-      else{
-        returnPhrase += input.substring(nonLetters.get(i), nonLetters.get(i)+1);
-        System.out.println("xf"+ input.substring(nonLetters.get(i), nonLetters.get(i)+1) + "xf");
-        System.out.println("here!");
-        System.out.println(returnPhrase + "f");
-        }
-      
-      if(i == nonLetters.size()-2){
-        return returnPhrase;
-      }
-      System.out.println(returnPhrase + "x");
-    }
     return returnPhrase;
+    for(int i = 0; i <= nonLetters.size(); i++){
+      System.out.println()
+    }
   }
+
+
+
+
+
+
+
+
+
+
+    // boolean isNext = false;
+    // int valoffset = 0;
+    // String additive = "";
+    // for(int i = 0; i < nonLetters.size(); i++){ 
+    //   System.out.println("top: " + i + "  " + nonLetters.get(i) + "  " + isNext);
+    //   if(!isNext){
+    //     if(nonLetters.get(0) != 0 && i == 0){
+    //       returnPhrase += PigLatinTranslator.translateWord(input.substring(0, nonLetters.get(i)));
+    //       System.out.println("x" + input.substring(0, nonLetters.get(i)) + "x");
+    //     }
+    //     if(nonLetters.get(i) != nonLetters.get(i+1)-1 && i != 0){
+    //       additive = input.substring(nonLetters.get(i-1)+1, nonLetters.get(i));
+    //       System.out.println("xxx" + input.substring(nonLetters.get(i-1-valoffset)+1, nonLetters.get(i-valoffset)) + "xxx");
+    //       returnPhrase += PigLatinTranslator.translateWord(additive);
+    //       System.out.println("xb" + additive + "xb");
+    //       System.out.println("xa"+ PigLatinTranslator.translateWord(additive) + "xa");
+    //       System.out.println(returnPhrase+"xreturned");
+    //     }
+    //   }
+    //   returnPhrase += input.substring(nonLetters.get(i), nonLetters.get(i)+1);
+    //   isNext = false;
+    //   System.out.println("xnb"+ input.substring(nonLetters.get(i), nonLetters.get(i)+1) + "xnb");
+    //   System.out.println(returnPhrase + "xreturnednon");
+    //   if(nonLetters.get(i-valoffset) == nonLetters.get(i+1)-valoffset-1){
+    //     isNext = true;
+    //     valoffset++;
+    //     System.out.println("NEXT IS TRUE!");
+    //   }
+    //   if(i == nonLetters.size()-2){
+    //     return returnPhrase;
+    //   }
+    //   System.out.println(returnPhrase + "x");
+    // }
+    // return returnPhrase;
+  } 
+
     
 
   public static String translateWord(String input)
