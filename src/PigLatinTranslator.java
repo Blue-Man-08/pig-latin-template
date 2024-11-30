@@ -19,15 +19,56 @@ public class PigLatinTranslator
     return result;
   }
   public static String translateLine(String input){
-    // "tryants, in paris, my goats."
-    input = input+" ";
+    // "tryants, in paris, my goats. "
+    //  01234567890123456789012345678
+    //  00000000001111111111222222222
+    // "yrantsay, inay arispay, ymay oatsgay."
+    input += " ";
     String returnPhrase = "";
     List<Integer> nonLetters = nonLetterPlace(input);
-    System.out.println(nonLetters);
+    boolean passall = false;
+    String addVal = "";
+    boolean firstPass = true;
+    boolean nextIs = false;
+    for(int i = 0; i <= nonLetters.size(); i++)
+    {
+      addVal = "";
+      passall = false;
+      if(!firstPass && i < nonLetters.size()-1){
+        returnPhrase += input.substring(nonLetters.get(i), nonLetters.get(i)+1);
+        nextIs = false;
+      }
+      if(nonLetters.get(0) == 0 && firstPass){
+        if(i < nonLetters.size()-1){
+          if(nonLetters.get(i) == nonLetters.get(i+1)-1){
+            nextIs = true;
+          }
+        }
+        returnPhrase += input.substring(nonLetters.get(i), nonLetters.get(i)+1);
+        passall = true;
+        firstPass = false;
+      }
+      if(!passall && !nextIs){
+        if(firstPass){
+          addVal = translateWord(input.substring(0, nonLetters.get(0)));
+          returnPhrase += addVal;
+          firstPass = false;
+          returnPhrase += input.substring(nonLetters.get(i), nonLetters.get(i)+1);
+          nextIs = false;
+
+        }
+        if(i < nonLetters.size()-1){
+          if(nonLetters.get(i) == nonLetters.get(i+1)-1){
+            nextIs = true;
+          }
+        }
+        if(!nextIs && i < nonLetters.size()-1){
+          addVal = translateWord(input.substring(nonLetters.get(i)+1, nonLetters.get(i+1)));
+          returnPhrase += addVal;
+        }
+        }
+      }
     return returnPhrase;
-    for(int i = 0; i <= nonLetters.size(); i++){
-      System.out.println()
-    }
   }
 
 
@@ -72,8 +113,7 @@ public class PigLatinTranslator
     //   }
     //   System.out.println(returnPhrase + "x");
     // }
-    // return returnPhrase;
-  } 
+    // return returnPhrase; 
 
     
 
