@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.File;  // Import the File class
+import java.io.FileWriter;
+import java.io.IOException;  // Import the IOException class to handle errors
 import java.net.*;
 import java.util.Scanner;
 import java.util.ArrayList; 
@@ -31,7 +33,25 @@ public class Book
             }
         }
     }
-
+    public ArrayList<String> returnText()
+    {
+        return text;
+    }
+    public String returnLines(int start, int length){
+        String returnVal = "";
+        for(int i = start; i <start+length; i++){
+            if(i < text.size())
+            {
+                returnVal += text.get(i);
+                returnVal += "\n";
+            }
+            else{
+                returnVal = "Line: " + i + " not in book.";
+                return returnVal;
+            }
+        }
+        return returnVal;
+    }
     String getTitle()
     {
         return title;
@@ -46,7 +66,7 @@ public class Book
         return text.get(lineNumber);
     }
 
-    int getLineCount()
+    public int getLineCount()
     {
         return text.size();
     }
@@ -89,8 +109,30 @@ public class Book
         }
     }
 
-    void writeToFile()
+    void writeToFile(String fileName, int start, int length)
     {
-        // Add code here to write the contents of the book to a file.
+        try {
+            File myObj = new File(fileName);
+            if (myObj.createNewFile()) {
+              System.out.println("File created: " + myObj.getName());
+            } else {
+              System.out.println("File already exists.");
+            }
+          } 
+          catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+          }
+          try {
+            FileWriter myWriter = new FileWriter(fileName);
+            String writtenData = PigLatinTranslator.translate(returnLines(start, length));
+            myWriter.write(writtenData);
+            myWriter.close();
+            System.out.println("Written to file: " + fileName);
+        } 
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }
